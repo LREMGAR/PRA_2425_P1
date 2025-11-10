@@ -30,7 +30,7 @@ class ListArray : public List<T> {
 	public:
 		//miembros públicos, incluidos los heredados de List<T>
 		ListArray(){
-				arr = new T(MINSIZE);
+				arr = new T[MINSIZE];
 				max = MINSIZE;
 				n = 0;
 
@@ -39,7 +39,7 @@ class ListArray : public List<T> {
 			delete[] arr;
 		}
 
-		T operator[](int pos){
+		T operator[](int pos) const{
 			if(pos < 0 || pos >= n){
 				throw std::out_of_range("Indice fuera de rango");
 			}
@@ -79,10 +79,11 @@ class ListArray : public List<T> {
 			insert(0,e);
 		}
 
-    		void remove(int pos) override{
+    	T remove(int pos) override{
 			if (pos < 0 || pos >= n){
 				throw std::out_of_range("Posicion invalida");
 			}
+			T removed = arr[pos];
 			for (int i = pos; i < n - 1; i++){
 				arr[i] = arr[i +1];
 			}
@@ -91,7 +92,7 @@ class ListArray : public List<T> {
 			if(n < max / 4 && max / 2 >= MINSIZE){
 				resize(max / 2);
 			}
-
+			return removed;
 		}
 
 		int search(T e) override{
