@@ -2,19 +2,20 @@
 #define NODE_H
 
 #include <ostream>
+
 template <typename T> 
 class Node {
-    public:
-        // miembros públicos
-        T data;
-        Node<T>* next;
+public:
+    // miembros públicos
+    T data;
+    Node<T>* next;
 
-        Node(T data, Node<T>* next = nullptr) : data(data), next(next) {}
+    Node(T data, Node<T>* next = nullptr) : data(data), next(next) {}
 
-        friend std::ostream& operator<<(std::ostream& out, const Node<T>& node) {
-            out << node.data;
-            return out;
-        }
+    friend std::ostream& operator<<(std::ostream& out, const Node<T>& node) {
+    	out << node.data;
+        return out;
+    }
     
 };
 
